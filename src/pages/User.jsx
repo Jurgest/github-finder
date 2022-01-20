@@ -7,11 +7,13 @@ import RepoList from '../components/repos/RepoList';
 
 const User = () => {
 
-    const {getUser, user, loading, getRepos } = useContext(GithubContext) 
+    const {getUser, user, loading, getUserRepos, repos } = useContext(GithubContext) 
 
     const params = useParams()
     useEffect(()=> {
         getUser(params.login)
+        getUserRepos(params.login)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const {
@@ -148,7 +150,7 @@ const User = () => {
                         {public_repos}
                     </div>
                 </div>
-            </div>
+           
             <div className="stat">
                     <div className="stat-figure text-secondary">
                         <FaStore className='text-3xl md:text-5xl' />
@@ -160,7 +162,8 @@ const User = () => {
                         {public_gists}
                     </div>
                 </div>
-                {/* <RepoList repos={getRepos} /> */}
+                </div>
+                <RepoList repos={repos} />
         </div>
     </>
 };
